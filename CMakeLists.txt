@@ -6,7 +6,8 @@ set(SFML_LIB    sfml-graphics
                 sfml-window
                 sfml-system)
 
-set(SRC Block.cpp)
+set(SRC Block.cpp
+        Moveable.cpp)
 
 add_library(${PROJECT_NAME}-lib STATIC ${SRC})
 add_executable(${PROJECT_NAME} main.cpp)

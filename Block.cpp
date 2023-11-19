@@ -27,3 +27,4 @@ void Block::setPosition(sf::Vector2f newPosition)
 {
     position_ = newPosition;
 };
+
