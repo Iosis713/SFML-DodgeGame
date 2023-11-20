@@ -17,6 +17,7 @@ protected:
     Direction direction_ = Direction::Right;
     sf::Vector2f velocity_;
     float maximumHorizontalVelocity = 5.f;
+    float friction_ = 0.2f;
 
 public:
 

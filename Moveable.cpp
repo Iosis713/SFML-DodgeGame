@@ -24,10 +24,10 @@ void Moveable::move()
 
             if(velocity_.x > -maximumHorizontalVelocity)
             {
-                velocity_.x -= 0.3; //inertia
+                velocity_.x -= friction_; //inertia
             }
             else if(velocity_.x > -maximumHorizontalVelocity &&
-                    velocity_.x < -maximumHorizontalVelocity + 0.3)
+                    velocity_.x < -maximumHorizontalVelocity + friction_)
             {
                 velocity_.x = -maximumHorizontalVelocity; 
             }
@@ -39,10 +39,10 @@ void Moveable::move()
 
             if(velocity_.x < maximumHorizontalVelocity)
             {
-                velocity_.x += 0.3;
+                velocity_.x += friction_;
             }
             else if(velocity_.x < maximumHorizontalVelocity &&
-                    velocity_.x > maximumHorizontalVelocity - 0.3)
+                    velocity_.x > maximumHorizontalVelocity - friction_)
             {
                 velocity_.x = maximumHorizontalVelocity; 
             }
@@ -51,21 +51,21 @@ void Moveable::move()
     //slowing down intertia
     else
     {
-        if(velocity_.x > 0.0 && velocity_.x <= 0.3)
+        if(velocity_.x > 0.0 && velocity_.x <= friction_)
         {
             velocity_.x = 0.0;
         }
         else if(velocity_.x > 0.0)
         {
-            velocity_.x -= 0.3;
+            velocity_.x -= friction_;
         }
-        else if(velocity_.x < 0.0 && velocity_.x >= -0.3)
+        else if(velocity_.x < 0.0 && velocity_.x >= -friction_)
         {
             velocity_.x = 0.0;
         }
         else if(velocity_.x < 0.0)
         {
-            velocity_.x += 0.3;
+            velocity_.x += friction_;
         }
         /*else
         {
