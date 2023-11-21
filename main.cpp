@@ -11,8 +11,7 @@
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Dodge Game");
-
-    //Block block1(sf::Vector2f(100.f, 200.f), 100.f, 200.f, sf::Color::Green);
+    
     std::unique_ptr<Block> blockPtr1 = std::make_unique<Block>(sf::Vector2f(100.f, 200.f), 100.f, 200.f, sf::Color::Green);
     Moveable moveable1(sf::Vector2f(800.f, 250.f), 100.f, 100.f, sf::Color::Blue);
     

@@ -5,9 +5,9 @@ Moveable::Moveable(sf::Vector2f position, float const lenght, float const height
 {
 };
 
-void Moveable::checkCollision(std::unique_ptr<Block>& blockPtr)
+void Moveable::checkCollision(const std::unique_ptr<Block>& blockPtr)
 {
-    std::cout << "checkColiision\n";
+    //std::cout << "checkColiision\n";
     if(position_.x >= blockPtr->getPosition().x
     && position_.x < blockPtr->getPosition().x + blockPtr->getLenght()
     && position_.y >= blockPtr->getPosition().y
@@ -19,7 +19,7 @@ void Moveable::checkCollision(std::unique_ptr<Block>& blockPtr)
     {
         collisionStatus_ = false;
     }
-    std::cout << "collision status: " << collisionStatus_ << '\n';
+    //std::cout << "collision status: " << collisionStatus_ << '\n';
 }
 
 sf::Vector2f const Moveable::getVelocity()
@@ -33,7 +33,8 @@ void Moveable::setVelocity(sf::Vector2f newVelocity)
 }
 
 void Moveable::move()
-{
+{   
+    //horizontal movement
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
         {
             direction_ = Direction::Left;
@@ -63,8 +64,7 @@ void Moveable::move()
                 velocity_.x = maximumHorizontalVelocity; 
             }
         }
-
-    //slowing down intertia
+    //horizontal interia
     else
     {
         if(velocity_.x > 0.0 && velocity_.x <= friction_)
@@ -83,11 +83,59 @@ void Moveable::move()
         {
             velocity_.x += friction_;
         }
-        /*else
+    }
+
+    //vertical movement
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
         {
-            velocity_.x = 0.0;
+            direction_ = Direction::Up;
+
+            if(velocity_.y > -maximumHorizontalVelocity)
+            {
+                velocity_.y -= friction_;
+            }
+            else if(velocity_.y > maximumHorizontalVelocity &&
+                    velocity_.y < maximumHorizontalVelocity + friction_)
+            {
+                velocity_.y = -maximumHorizontalVelocity; 
+            }
         }
-        */
+    
+    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+        {
+            direction_ = Direction::Down;
+
+            if(velocity_.y < maximumHorizontalVelocity)
+            {
+                velocity_.y += friction_;
+            }
+            else if(velocity_.y < maximumHorizontalVelocity &&
+                    velocity_.y> maximumHorizontalVelocity - friction_)
+            {
+                velocity_.y = maximumHorizontalVelocity; 
+            }
+        }
+    
+    //slowing down vertical intertia
+    else
+    {        
+        if(velocity_.y > 0.0 && velocity_.y <= friction_)
+        {
+            velocity_.y = 0.0;
+        }
+        else if(velocity_.y > 0.0)
+        {
+            velocity_.y -= friction_;
+        }
+        else if(velocity_.y < 0.0 && velocity_.y >= -friction_)
+        {
+            velocity_.y = 0.0;
+        }
+        else if(velocity_.y < 0.0)
+        {
+            velocity_.y += friction_;
+        }
+       
     }
 }
 

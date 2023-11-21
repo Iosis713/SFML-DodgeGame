@@ -27,6 +27,6 @@ public:
     void setVelocity(sf::Vector2f newVelocity);
     void updatePosition();
     void move();
-    void checkCollision(std::unique_ptr<Block>& blockPtr);
+    void checkCollision(const std::unique_ptr<Block>& blockPtr);
 };
 
