@@ -18,13 +18,15 @@ protected:
     sf::Vector2f velocity_;
     float maximumHorizontalVelocity = 5.f;
     float friction_ = 0.2f;
+    bool collisionStatus_ = false;
 
 public:
 
-    Moveable(sf::Vector2f position, float lenght, float height);
-    sf::Vector2f getVelocity();
+    Moveable(sf::Vector2f position, float const lenght, float const height, sf::Color color);
+    sf::Vector2f const getVelocity();
     void setVelocity(sf::Vector2f newVelocity);
     void updatePosition();
     void move();
+    void checkCollision(std::unique_ptr<Block>& blockPtr);
 };
 

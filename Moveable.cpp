@@ -1,12 +1,28 @@
 #include "Headers/Moveable.hpp"
 
-Moveable::Moveable(sf::Vector2f position, float lenght, float height)
-    : Block::Block(position, lenght, height)
+Moveable::Moveable(sf::Vector2f position, float const lenght, float const height, sf::Color color)
+    : Block::Block(position, lenght, height, color)
 {
-    //Block::Block(position, lenght, height)
 };
 
-sf::Vector2f Moveable::getVelocity()
+void Moveable::checkCollision(std::unique_ptr<Block>& blockPtr)
+{
+    std::cout << "checkColiision\n";
+    if(position_.x >= blockPtr->getPosition().x
+    && position_.x < blockPtr->getPosition().x + blockPtr->getLenght()
+    && position_.y >= blockPtr->getPosition().y
+    && position_.y < blockPtr->getPosition().y + blockPtr->getHeight())
+    {
+        collisionStatus_ = true;
+    }
+    else
+    {
+        collisionStatus_ = false;
+    }
+    std::cout << "collision status: " << collisionStatus_ << '\n';
+}
+
+sf::Vector2f const Moveable::getVelocity()
 {
     return this -> velocity_;
 }
@@ -80,4 +96,6 @@ void Moveable::updatePosition()
     position_.x += velocity_.x;
     position_.y += velocity_.y;
 }
+
+
 

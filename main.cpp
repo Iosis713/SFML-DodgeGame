@@ -1,18 +1,20 @@
-#include "Headers/Global.hpp"
 #include <iostream>
 #include "Headers/Block.hpp"
+#include "Headers/Global.hpp"
 #include "Headers/Moveable.hpp"
 #include <SFML/Graphics.hpp>
 
 #include <chrono>
+#include <memory>
 #include <thread>
 
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(SCREEN_WIDTH, SCREEN_HEIGHT), "Dodge Game");
 
-    Block block1(sf::Vector2f(200.f, 400.f), 40.f, 200.f);
-    Moveable moveable1(sf::Vector2f(100.f, 50.f), 80.f, 300.f);
+    //Block block1(sf::Vector2f(100.f, 200.f), 100.f, 200.f, sf::Color::Green);
+    std::unique_ptr<Block> blockPtr1 = std::make_unique<Block>(sf::Vector2f(100.f, 200.f), 100.f, 200.f, sf::Color::Green);
+    Moveable moveable1(sf::Vector2f(800.f, 250.f), 100.f, 100.f, sf::Color::Blue);
     
     while(window.isOpen())
     {
@@ -26,10 +28,12 @@ int main()
         }
         window.clear();
         
-        block1.draw(window);
+        blockPtr1->draw(window);
         
         //moveable test
+        
         moveable1.move();
+        moveable1.checkCollision(blockPtr1);
         moveable1.updatePosition();
         moveable1.draw(window);
 
