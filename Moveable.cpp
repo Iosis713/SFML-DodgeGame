@@ -8,8 +8,17 @@ Moveable::Moveable(sf::Vector2f position, float const lenght, float const height
 void Moveable::checkCollision(const std::unique_ptr<Block>& blockPtr)
 {
     //std::cout << "checkColiision\n";
+    //left top vertex
     if(position_.x >= blockPtr->getPosition().x
     && position_.x < blockPtr->getPosition().x + blockPtr->getLenght()
+    && position_.y >= blockPtr->getPosition().y
+    && position_.y < blockPtr->getPosition().y + blockPtr->getHeight())
+    {
+        collisionStatus_ = true;
+    }
+    //right top vertex
+    else if(position_.x + lenght_ >= blockPtr->getPosition().x
+    && position_.x + lenght_ < blockPtr->getPosition().x + blockPtr->getLenght()
     && position_.y >= blockPtr->getPosition().y
     && position_.y < blockPtr->getPosition().y + blockPtr->getHeight())
     {
@@ -19,7 +28,7 @@ void Moveable::checkCollision(const std::unique_ptr<Block>& blockPtr)
     {
         collisionStatus_ = false;
     }
-    //std::cout << "collision status: " << collisionStatus_ << '\n';
+    std::cout << "collision status: " << collisionStatus_ << '\n';
 }
 
 sf::Vector2f const Moveable::getVelocity()
