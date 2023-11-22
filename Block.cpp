@@ -17,6 +17,11 @@ void Block::draw(sf::RenderWindow& i_window)
     i_window.draw(rectangle_);
 };
 
+bool Block::getCollisionStatus() const
+{
+    return this-> collisionStatus_;
+}
+
 float Block::getHeight() const
 {
     return this-> height_;
@@ -31,6 +36,11 @@ sf::Vector2f const Block::getPosition()
 {
     return this-> position_;
 };
+
+void Block::setCollisionStatus(bool status)
+{
+    collisionStatus_ = status;
+}
 
 void Block::setPosition(sf::Vector2f newPosition)
 {

@@ -18,7 +18,6 @@ protected:
     sf::Vector2f velocity_;
     float maximumHorizontalVelocity = 5.f;
     float friction_ = 0.2f;
-    bool collisionStatus_ = false;
 
 public:
 

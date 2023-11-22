@@ -10,23 +10,45 @@ void Moveable::checkCollision(const std::unique_ptr<Block>& blockPtr)
     //std::cout << "checkColiision\n";
     //left top vertex
     if(position_.x >= blockPtr->getPosition().x
-    && position_.x < blockPtr->getPosition().x + blockPtr->getLenght()
+    && position_.x <= blockPtr->getPosition().x + blockPtr->getLenght()
     && position_.y >= blockPtr->getPosition().y
-    && position_.y < blockPtr->getPosition().y + blockPtr->getHeight())
+    && position_.y <= blockPtr->getPosition().y + blockPtr->getHeight())
     {
         collisionStatus_ = true;
+        blockPtr->setCollisionStatus(true);
     }
     //right top vertex
     else if(position_.x + lenght_ >= blockPtr->getPosition().x
-    && position_.x + lenght_ < blockPtr->getPosition().x + blockPtr->getLenght()
-    && position_.y >= blockPtr->getPosition().y
-    && position_.y < blockPtr->getPosition().y + blockPtr->getHeight())
+         && position_.x + lenght_ <= blockPtr->getPosition().x + blockPtr->getLenght()
+         && position_.y >= blockPtr->getPosition().y
+         && position_.y <= blockPtr->getPosition().y + blockPtr->getHeight())
     {
         collisionStatus_ = true;
+        blockPtr->setCollisionStatus(true);
     }
+    //bottop left vertex
+    else if(position_.x >= blockPtr->getPosition().x
+         && position_.x <= blockPtr->getPosition().x + blockPtr->getLenght()
+         && position_.y + height_ >= blockPtr->getPosition().y
+         && position_.y + height_ <= blockPtr->getPosition().y + blockPtr->getHeight())
+    {
+        collisionStatus_ = true;
+        blockPtr->setCollisionStatus(true);
+    }
+    //bottom right vertex
+    else if(position_.x + lenght_ >= blockPtr->getPosition().x
+         && position_.x + lenght_ <= blockPtr->getPosition().x + blockPtr->getLenght()
+         && position_.y + height_ >= blockPtr->getPosition().y
+         && position_.y + height_ <= blockPtr->getPosition().y + blockPtr->getHeight())
+    {
+        collisionStatus_ = true;
+        blockPtr->setCollisionStatus(true);
+    }
+
     else
     {
         collisionStatus_ = false;
+        blockPtr->setCollisionStatus(false);
     }
     std::cout << "collision status: " << collisionStatus_ << '\n';
 }
