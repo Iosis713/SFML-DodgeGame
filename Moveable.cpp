@@ -10,37 +10,37 @@ void Moveable::checkCollision(std::unique_ptr<Block>& blockPtr)
     sf::Vector2f penetration_(0.0, 0.0);
     //std::cout << "checkColiision\n";
     //left top vertex
-    if(position_.x >= blockPtr->getPosition().x
-    && position_.x <= blockPtr->getPosition().x + blockPtr->getLenght()
-    && position_.y >= blockPtr->getPosition().y
-    && position_.y <= blockPtr->getPosition().y + blockPtr->getHeight())
+    if(position_.x > blockPtr->getPosition().x
+    && position_.x < blockPtr->getPosition().x + blockPtr->getLenght()
+    && position_.y > blockPtr->getPosition().y
+    && position_.y < blockPtr->getPosition().y + blockPtr->getHeight())
     {
         collidedVertex_ = CollidedVertex::LeftTop;
         setCollisionPosition(blockPtr, true);
     }
     //right top vertex
-    else if(position_.x + lenght_ >= blockPtr->getPosition().x
-         && position_.x + lenght_ <= blockPtr->getPosition().x + blockPtr->getLenght()
-         && position_.y >= blockPtr->getPosition().y
-         && position_.y <= blockPtr->getPosition().y + blockPtr->getHeight())
+    else if(position_.x + lenght_ > blockPtr->getPosition().x
+         && position_.x + lenght_ < blockPtr->getPosition().x + blockPtr->getLenght()
+         && position_.y > blockPtr->getPosition().y
+         && position_.y < blockPtr->getPosition().y + blockPtr->getHeight())
     {
         collidedVertex_ = CollidedVertex::RightTop;
         setCollisionPosition(blockPtr, true);
     }
     //bottop left vertex
-    else if(position_.x >= blockPtr->getPosition().x
-         && position_.x <= blockPtr->getPosition().x + blockPtr->getLenght()
-         && position_.y + height_ >= blockPtr->getPosition().y
-         && position_.y + height_ <= blockPtr->getPosition().y + blockPtr->getHeight())
+    else if(position_.x > blockPtr->getPosition().x
+         && position_.x < blockPtr->getPosition().x + blockPtr->getLenght()
+         && position_.y + height_ > blockPtr->getPosition().y
+         && position_.y + height_ < blockPtr->getPosition().y + blockPtr->getHeight())
     {
         collidedVertex_ = CollidedVertex::LeftBottom;
         setCollisionPosition(blockPtr, true);
     }
     //bottom right vertex
-    else if(position_.x + lenght_ >= blockPtr->getPosition().x
-         && position_.x + lenght_ <= blockPtr->getPosition().x + blockPtr->getLenght()
-         && position_.y + height_ >= blockPtr->getPosition().y
-         && position_.y + height_ <= blockPtr->getPosition().y + blockPtr->getHeight())
+    else if(position_.x + lenght_ > blockPtr->getPosition().x
+         && position_.x + lenght_ < blockPtr->getPosition().x + blockPtr->getLenght()
+         && position_.y + height_ > blockPtr->getPosition().y
+         && position_.y + height_ < blockPtr->getPosition().y + blockPtr->getHeight())
     {
         collidedVertex_ = CollidedVertex::RightBottom;
         setCollisionPosition(blockPtr, true);

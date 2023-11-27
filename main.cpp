@@ -32,8 +32,9 @@ int main()
         //moveable test
         
         moveable1.move();
-        moveable1.checkCollision(blockPtr1);
+        //moveable1.checkCollision(blockPtr1);
         moveable1.updatePosition();
+        moveable1.checkCollision(blockPtr1);
         moveable1.draw(window);
 
         window.display();
